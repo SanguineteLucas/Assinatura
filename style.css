@@ -1,0 +1,171 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: #F9E6F2; /* Rosa pastel muito claro */
+    color: #333; /* Texto escuro */
+}
+
+header {
+    background: #EAB8E4; /* Rosa pastel suave */
+    color: #333;
+    padding: 40px 0;
+}
+
+.container {
+    width: 90%;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+header h1 {
+    margin: 0;
+    text-align: center;
+    font-size: 2.5rem; /* Tamanho maior para o título */
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    text-align: center;
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 20px; /* Mais espaço entre os itens do menu */
+}
+
+nav a {
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #C87BB2; /* Cor ao passar o mouse */
+}
+
+main {
+    padding: 20px 0;
+}
+
+.card {
+    background: #FFF3F5; /* Rosa muito suave */
+    border-radius: 12px; /* Cantos mais arredondados */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 20px 0;
+    padding: 30px; /* Mais espaço interno */
+}
+
+h2 {
+    color: #EAB8E4; /* Rosa pastel suave */
+    margin-bottom: 15px; /* Espaçamento inferior */
+}
+
+.plan-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px; /* Espaço entre os planos */
+}
+
+.plan {
+    background: #FFF3F5; /* Rosa muito suave */
+    border: 1px solid #e0e0e0; /* Borda leve */
+    border-radius: 12px; /* Cantos arredondados */
+    padding: 20px;
+    flex: 1; /* Faz com que os planos ocupem espaço igual */
+    text-align: center;
+    transition: transform 0.3s; /* Efeito de transformação ao passar o mouse */
+}
+
+.plan:hover {
+    transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+}
+
+.btn {
+    background: #A4D3E2; /* Azul pastel claro para o botão de assinar */
+    color: #fff; /* Texto branco para contraste */
+    border: none;
+    padding: 12px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s;
+    font-weight: bold; /* Texto em negrito */
+}
+
+.btn:hover {
+    background: #8FC1D5; /* Cor ao passar o mouse para o botão */
+    transform: translateY(-2px); /* Efeito de elevação ao passar o mouse */
+}
+
+footer {
+    text-align: center;
+    padding: 20px 0;
+    background: #EAB8E4; /* Rosa pastel suave */
+    color: #333;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    font-weight: bold; /* Texto em negrito */
+}
+
+.thank-you-container {
+    text-align: center;
+    padding: 50px;
+}
+/* Estilos existentes... */
+
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed; /* Fica em cima da tela */
+    z-index: 1; /* Fica na frente */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+    overflow: auto; /* Permite rolagem se necessário */
+    background-color: rgb(0,0,0); /* Fundo preto */
+    background-color: rgba(0,0,0,0.4); /* Fundo preto com opacidade */
+}
+
+.modal-content {
+    background-color: #FFF; /* Fundo branco do modal */
+    margin: 15% auto; /* Margem no topo */
+    padding: 20px;
+    border: 1px solid #e0e0e0; /* Borda leve */
+    width: 80%; /* Largura do modal */
+    border-radius: 12px; /* Cantos arredondados */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    animation: slide-in 0.5s; /* Animação de entrada */
+}
+
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.close {
+    color: #aaa; /* Cor do 'X' */
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black; /* Cor ao passar o mouse */
+    text-decoration: none;
+    cursor: pointer;
+}

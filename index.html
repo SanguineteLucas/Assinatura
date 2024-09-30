@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Assinatura de Conteúdo</title>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Bem-vindo ao nosso Serviço de Assinatura!</h1>
+            <nav>
+                <ul>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#precos">Preços</a></li>
+                    <li><a href="#feedback">Feedback</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        <section id="sobre" class="card">
+            <h2>Sobre Nós</h2>
+            <p>Nosso serviço oferece acesso exclusivo a conteúdo premium, incluindo artigos, vídeos e muito mais. Assine hoje e comece sua jornada de aprendizado!</p>
+        </section>
+
+        <section id="precos" class="card">
+            <h2>Planos de Assinatura</h2>
+            <div class="plan-container">
+                <div class="plan">
+                    <h3>Plano Básico</h3>
+                    <p>R$ 29,90/mês</p>
+                    <p>Acesso a conteúdos limitados.</p>
+                    <button class="btn" onclick="openModal('Plano Básico')">Assinar</button>
+                </div>
+                <div class="plan">
+                    <h3>Plano Premium</h3>
+                    <p>R$ 59,90/mês</p>
+                    <p>Acesso total a todos os conteúdos.</p>
+                    <button class="btn" onclick="openModal('Plano Premium')">Assinar</button>
+                </div>
+            </div>
+            <p id="subscriber-count">Assinantes até agora: <span id="count">0</span></p>
+        </section>
+
+        <section id="dicas" class="card">
+            <h2>Dicas para Novos Assinantes</h2>
+            <ul>
+                <li>Explore todo o conteúdo disponível na sua área.</li>
+                <li>Participe das nossas webinars mensais.</li>
+                <li>Utilize nossa comunidade para trocar ideias e experiências.</li>
+            </ul>
+        </section>
+
+        <section id="feedback" class="card">
+            <h2>Deixe seu Feedback</h2>
+            <form id="feedback-form" onsubmit="handleFeedback(event)">
+                <label for="user-feedback">Seu Feedback:</label>
+                <textarea id="user-feedback" rows="4" required></textarea>
+                <button type="submit" class="btn">Enviar Feedback</button>
+            </form>
+            <div id="feedback-display"></div>
+        </section>
+
+        <section id="contato" class="card">
+            <h2>Contato</h2>
+            <form id="contact-form" onsubmit="handleContact(event)">
+                <label for="name">Nome:</label>
+                <input type="text" id="name" required>
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+                <label for="message">Mensagem:</label>
+                <textarea id="message" rows="4" required></textarea>
+                <button type="submit" class="btn">Enviar</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 Serviço de Assinatura. Todos os direitos reservados.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="subscription-modal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title"></h2>
+            <p>Você tem certeza que deseja assinar este plano?</p>
+            <button class="btn" id="confirm-btn">Confirmar Assinatura</button>
+        </div>
+    </div>
+
+    <script>
+        let subscriberCount = 0; // Contador de assinantes
+
+        function openModal(plan) {
+            document.getElementById('modal-title').innerText = `Assinar ${plan}`;
+            document.getElementById('subscription-modal').style.display = 'block';
+            document.getElementById('confirm-btn').onclick = function () {
+                handleSubscription(plan);
+            };
+        }
+
+        function closeModal() {
+            document.getElementById('subscription-modal').style.display = 'none';
+        }
+
+        function handleSubscription(plan) {
+            subscriberCount++;
+            document.getElementById('count').innerText = subscriberCount;
+            alert(`Você se inscreveu no ${plan}!`);
+            closeModal(); // Fecha o modal após a assinatura
+        }
+
+        function handleFeedback(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+            const feedback = document.getElementById('user-feedback').value;
+            const feedbackDisplay = document.getElementById('feedback-display');
+            
+            // Adiciona feedback ao Local Storage
+            let feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+            feedbacks.push(feedback);
+            localStorage.setItem('feedbacks', JSON.stringify(feedbacks));
+            
+            // Atualiza a exibição de feedbacks
+            feedbackDisplay.innerHTML += `<p>${feedback}</p>`;
+            document.getElementById('feedback-form').reset(); // Reseta o formulário
+            alert('Obrigado pelo seu feedback!');
+            loadFeedbacks(); // Carrega feedbacks do Local Storage
+        }
+
+        // Função para carregar feedbacks do Local Storage
+        function loadFeedbacks() {
+            const feedbacks = JSON.parse(localStorage.getItem('feedbacks')) || [];
+            const feedbackDisplay = document.getElementById('feedback-display');
+            feedbackDisplay.innerHTML = feedbacks.map(feedback => `<p>${feedback}</p>`).join('');
+        }
+
+        // Carrega feedbacks ao abrir a página
+        window.onload = loadFeedbacks;
+
+        function handleContact(event) {
+            event.preventDefault(); // Impede o envio padrão do formulário
+            alert('Obrigado pelo seu contato! Responderemos em breve.');
+            document.getElementById('contact-form').reset(); // Reseta o formulário
+        }
+
+        // Fecha o modal ao clicar fora dele
+        window.onclick = function (event) {
+            const modal = document.getElementById('subscription-modal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        };
+    </script>
+</body>
+</html>
